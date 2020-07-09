@@ -9,38 +9,52 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    // MARK: - Properties
-    var pictures = [String]()
+  // MARK: - Properties
+  var pictures = [String]()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-        // singleton for the shared file manager
-        let fileManager = FileManager.default
+    title = "Storm Viewer"
+    navigationController?.navigationBar.prefersLargeTitles = true
 
-        // path for current executables bundle's resources
-        let path = Bundle.main.resourcePath!
+    // singleton for the shared file manager
+    let fileManager = FileManager.default
 
-        // shallow search (doesn't follow symb links or sub dirs)
-        // returns [String] of paths found
-        let items = try! fileManager.contentsOfDirectory(atPath: path)
+    // path for current executables bundle's resources
+    let path = Bundle.main.resourcePath!
 
-        for item in items {
-            if item.hasPrefix("nssl") {
-                pictures.append(item)
-            }
-        }
+    // shallow search (doesn't follow symb links or sub dirs)
+    // returns [String] of paths found
+    let items = try! fileManager.contentsOfDirectory(atPath: path)
+
+    for item in items {
+      if item.hasPrefix("nssl") {
+        pictures.append(item)
+      }
     }
+  }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pictures.count
-    }
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return pictures.count
+  }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.text = pictures[indexPath.row]
-        return cell
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+    cell.textLabel?.text = pictures[indexPath.row]
+    return cell
+  }
+
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // try loading the "Detail" view controller and cast to Detail VC
+    if let viewController = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
+      // if successful, set the `selectedImage` prop
+      viewController.selectedImage = pictures[indexPath.row]
+
+      // push the detail VC onto the navigation view stack
+      navigationController?.pushViewController(viewController, animated: true)
     }
+  }
 }
 
 
