@@ -32,6 +32,8 @@ class ViewController: UITableViewController {
       if item.hasPrefix("nssl") {
         pictures.append(item)
       }
+      // Sort array ascending
+      pictures.sort()
     }
   }
 
@@ -50,6 +52,11 @@ class ViewController: UITableViewController {
     if let viewController = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
       // if successful, set the `selectedImage` prop
       viewController.selectedImage = pictures[indexPath.row]
+
+      let imageNumber = indexPath.row + 1
+      let imageTotal = pictures.count
+      viewController.imageNumber = imageNumber
+      viewController.imageTotal = imageTotal
 
       // push the detail VC onto the navigation view stack
       navigationController?.pushViewController(viewController, animated: true)

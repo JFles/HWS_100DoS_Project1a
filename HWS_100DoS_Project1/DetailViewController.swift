@@ -13,11 +13,17 @@ class DetailViewController: UIViewController {
   // Is Apple's recommendation still to have outlets declared with `strong`?
   @IBOutlet var imageView: UIImageView!
   var selectedImage: String?
+  var imageNumber: Int?
+  var imageTotal: Int?
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = selectedImage
+    if let imageNumber = imageNumber, let imageTotal = imageTotal {
+      title = "Picture \(imageNumber) of \(imageTotal)"
+    } else {
+      title = selectedImage
+    }
     navigationItem.largeTitleDisplayMode = .never
 
     if let imageToLoad = selectedImage {
