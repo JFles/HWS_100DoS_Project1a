@@ -26,11 +26,11 @@ class DetailViewController: UIViewController {
         }
         navigationItem.largeTitleDisplayMode = .never
 
-        navigationItem.rightBarButtonItem =
-            UIBarButtonItem(
-                barButtonSystemItem: .action,
-                target: self,
-                action: #selector(shareTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(shareTapped)
+        )
 
         if let imageToLoad = selectedImage {
             imageView.image = UIImage(named: imageToLoad)
@@ -51,7 +51,8 @@ class DetailViewController: UIViewController {
 
     @objc func shareTapped() {
         // get image.imageview and scale jpeg at 0.8
-        guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else {
+        guard let image = imageView.image?.jpegData(compressionQuality: 0.8)
+        else {
             print("No image found")
             return
         }
@@ -59,16 +60,20 @@ class DetailViewController: UIViewController {
         let imageTitle = selectedImage ?? "StormImage\(imageNumber ?? 0).jpg"
 
         // call UIActivityViewController
-//        #warning("TODO: Add string name to share item")
+        //        #warning("TODO: Add string name to share item")
         // TODO: Add string name to share item
         /*
             - How do i add a string title to `activityItems: [Data]`?
                 - can add the
          */
-        let vc = UIActivityViewController(activityItems: [imageTitle, image], applicationActivities: nil)
+        let vc = UIActivityViewController(
+            activityItems: [imageTitle, image],
+            applicationActivities: nil
+        )
 
         // iPad compatibility
-        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        vc.popoverPresentationController?.barButtonItem =
+            navigationItem.rightBarButtonItem
 
         // present vc
         present(vc, animated: true)
