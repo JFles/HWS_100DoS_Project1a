@@ -28,6 +28,22 @@ class HomeViewController: UITableViewController {
         getPicturesFromAppBundle()
     }
 
+    fileprivate func getPicturesFromAppBundle() {
+        DispatchQueue.global().async { [weak self] in
+            guard let strongSelf = self else { return }
+
+            let fileManager = FileManager.default
+            let path = Bundle.main.resourcePath!
+            let items = try! fileManager.contentsOfDirectory(atPath: path)
+
+            for item in items {
+                if item.hasPrefix("nssl") { strongSelf.pictures.append(item) }
+                // Sort array ascending
+                strongSelf.pictures.sort()
+            }
+        }
+    }
+
     override func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
@@ -81,23 +97,5 @@ class HomeViewController: UITableViewController {
         )
 
         present(activityController, animated: true)
-    }
-
-    // MARK: - Fileprivate methods
-    fileprivate func getPicturesFromAppBundle() {
-        // singleton for the shared file manager
-        let fileManager = FileManager.default
-
-        // path for current executables bundle's resources
-        let path = Bundle.main.resourcePath!
-        // shallow search (doesn't follow symb links or sub dirs)
-        // returns [String] of paths found
-        let items = try! fileManager.contentsOfDirectory(atPath: path)
-
-        for item in items {
-            if item.hasPrefix("nssl") { pictures.append(item) }
-            // Sort array ascending
-            pictures.sort()
-        }
     }
 }
