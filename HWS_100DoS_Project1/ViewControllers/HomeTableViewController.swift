@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeTableViewController.swift
 //  HWS_100DoS_Project1
 //
 //  Created by Jeremy Fleshman on 7/5/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UITableViewController {
+class HomeTableViewController: UITableViewController {
     // MARK: - Properties
     var pictures = [String]()
 
