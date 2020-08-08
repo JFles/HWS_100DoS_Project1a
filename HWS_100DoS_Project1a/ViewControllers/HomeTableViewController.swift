@@ -12,6 +12,7 @@ class HomeTableViewController: UITableViewController {
     // MARK: - Properties
     var pictures = [String]()
 
+    // MARK: Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +45,23 @@ class HomeTableViewController: UITableViewController {
         }
     }
 
+    /// Challenge 2 - https://www.hackingwithswift.com/read/3/3/wrap-up
+    @objc func shareApp() {
+        let appUrl = URL(
+            string: "https://www.hackingwithswift.com/read/3/3/wrap-up"
+        )!
+
+        let activityController = UIActivityViewController(
+            activityItems: [appUrl],
+            applicationActivities: nil
+        )
+
+        present(activityController, animated: true)
+    }
+}
+
+// MARK: - TableView methods
+extension HomeTableViewController {
     override func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
@@ -68,7 +86,7 @@ class HomeTableViewController: UITableViewController {
         // try loading the "Detail" view controller and cast to Detail VC
         if let viewController = storyboard?.instantiateViewController(
             identifier: "Detail"
-        ) as? DetailViewController {
+            ) as? DetailViewController {
             // if successful, set the `selectedImage` prop
             viewController.selectedImage = pictures[indexPath.row]
 
@@ -83,19 +101,5 @@ class HomeTableViewController: UITableViewController {
                 animated: true
             )
         }
-    }
-
-    // MARK: Challenge 2 - https://www.hackingwithswift.com/read/3/3/wrap-up
-    @objc func shareApp() {
-        let appUrl = URL(
-            string: "https://www.hackingwithswift.com/read/3/3/wrap-up"
-        )!
-
-        let activityController = UIActivityViewController(
-            activityItems: [appUrl],
-            applicationActivities: nil
-        )
-
-        present(activityController, animated: true)
     }
 }

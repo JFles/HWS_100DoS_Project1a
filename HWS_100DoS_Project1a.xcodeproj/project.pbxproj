@@ -28,7 +28,7 @@
 
 /* Begin PBXFileReference section */
 		60D44CD024B6A362002E439F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		60D8F09524B2BF97009EED97 /* HWS_100DoS_Project1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HWS_100DoS_Project1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60D8F09524B2BF97009EED97 /* HWS_100DoS_Project1a.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HWS_100DoS_Project1a.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D8F09824B2BF97009EED97 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60D8F09A24B2BF97009EED97 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		60D8F09C24B2BF97009EED97 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		60D8F08C24B2BF97009EED97 = {
 			isa = PBXGroup;
 			children = (
-				60D8F09724B2BF97009EED97 /* HWS_100DoS_Project1 */,
+				60D8F09724B2BF97009EED97 /* HWS_100DoS_Project1a */,
 				60D8F09624B2BF97009EED97 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,12 +97,12 @@
 		60D8F09624B2BF97009EED97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60D8F09524B2BF97009EED97 /* HWS_100DoS_Project1.app */,
+				60D8F09524B2BF97009EED97 /* HWS_100DoS_Project1a.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		60D8F09724B2BF97009EED97 /* HWS_100DoS_Project1 */ = {
+		60D8F09724B2BF97009EED97 /* HWS_100DoS_Project1a */ = {
 			isa = PBXGroup;
 			children = (
 				601013DB24DB8AB800A753EB /* Delegates */,
@@ -112,7 +112,7 @@
 				60D8F0A624B2BF9A009EED97 /* Info.plist */,
 				60D8F0AC24B2CECE009EED97 /* Content */,
 			);
-			path = HWS_100DoS_Project1;
+			path = HWS_100DoS_Project1a;
 			sourceTree = "<group>";
 		};
 		60D8F0AC24B2CECE009EED97 /* Content */ = {
@@ -135,9 +135,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		60D8F09424B2BF97009EED97 /* HWS_100DoS_Project1 */ = {
+		60D8F09424B2BF97009EED97 /* HWS_100DoS_Project1a */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60D8F0A924B2BF9A009EED97 /* Build configuration list for PBXNativeTarget "HWS_100DoS_Project1" */;
+			buildConfigurationList = 60D8F0A924B2BF9A009EED97 /* Build configuration list for PBXNativeTarget "HWS_100DoS_Project1a" */;
 			buildPhases = (
 				60D8F09124B2BF97009EED97 /* Sources */,
 				60D8F09224B2BF97009EED97 /* Frameworks */,
@@ -147,9 +147,9 @@
 			);
 			dependencies = (
 			);
-			name = HWS_100DoS_Project1;
+			name = HWS_100DoS_Project1a;
 			productName = HWS_100DoS_Project1;
-			productReference = 60D8F09524B2BF97009EED97 /* HWS_100DoS_Project1.app */;
+			productReference = 60D8F09524B2BF97009EED97 /* HWS_100DoS_Project1a.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -167,7 +167,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 60D8F09024B2BF97009EED97 /* Build configuration list for PBXProject "HWS_100DoS_Project1" */;
+			buildConfigurationList = 60D8F09024B2BF97009EED97 /* Build configuration list for PBXProject "HWS_100DoS_Project1a" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -180,7 +180,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				60D8F09424B2BF97009EED97 /* HWS_100DoS_Project1 */,
+				60D8F09424B2BF97009EED97 /* HWS_100DoS_Project1a */,
 			);
 		};
 /* End PBXProject section */
@@ -362,7 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3C9P7PTK6N;
-				INFOPLIST_FILE = HWS_100DoS_Project1/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HWS_100DoS_Project1a/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -380,7 +380,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3C9P7PTK6N;
-				INFOPLIST_FILE = HWS_100DoS_Project1/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/HWS_100DoS_Project1a/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -395,7 +395,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		60D8F09024B2BF97009EED97 /* Build configuration list for PBXProject "HWS_100DoS_Project1" */ = {
+		60D8F09024B2BF97009EED97 /* Build configuration list for PBXProject "HWS_100DoS_Project1a" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60D8F0A724B2BF9A009EED97 /* Debug */,
@@ -404,7 +404,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		60D8F0A924B2BF9A009EED97 /* Build configuration list for PBXNativeTarget "HWS_100DoS_Project1" */ = {
+		60D8F0A924B2BF9A009EED97 /* Build configuration list for PBXNativeTarget "HWS_100DoS_Project1a" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60D8F0AA24B2BF9A009EED97 /* Debug */,
