@@ -10,22 +10,25 @@ import UIKit
 
 class HomeViewController: UIViewController {
     // MARK: - Properties
-    var pictures = [String]()
+    var pictures = [StormPicture]()
 
-    weak var collectionView: UICollectionView!
+    fileprivate let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsVerticalScrollIndicator = false
+
+        return collectionView
+    }()
 
     // MARK: - View methods
     override func loadView() {
         super.loadView()
 
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(collectionView)
-
         view.backgroundColor = .white
-        self.collectionView = collectionView
+
+        self.view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -50,21 +53,19 @@ class HomeViewController: UIViewController {
             action: #selector(shareApp)
         )
 
-        collectionView.backgroundColor = .blue
-
         getPicturesFromAppBundle()
     }
 
     fileprivate func configureCollectionView() {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.register(Cell.self, forCellWithReuseIdentifier: Cell.identifier)
+        self.collectionView.register(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: ThumbnailCollectionViewCell.identifier)
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.backgroundColor = .white
     }
 
     fileprivate func getPicturesFromAppBundle() {
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let strongSelf = self else { return }
 
             let fileManager = FileManager.default
@@ -72,14 +73,21 @@ class HomeViewController: UIViewController {
             let items = try! fileManager.contentsOfDirectory(atPath: path)
 
             for item in items {
-                if item.hasPrefix("nssl") { strongSelf.pictures.append(item) }
-                // Sort array ascending
+                if item.hasPrefix("nssl") {
+                    if let image = UIImage(named: item) {
+                        let picture = StormPicture(name: item, image: image)
+                        strongSelf.pictures.append(picture)
+                    }
+                }
                 strongSelf.pictures.sort()
+            }
+
+            DispatchQueue.main.async { [weak self] in
+                self?.collectionView.reloadData()
             }
         }
     }
 
-    /// Challenge 2 - https://www.hackingwithswift.com/read/3/3/wrap-up
     @objc func shareApp() {
         let appUrl = URL(
             string: "https://www.hackingwithswift.com/read/3/3/wrap-up"
@@ -145,11 +153,9 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.identifier, for: indexPath) as? Cell else { fatalError("Failed to create CollectionView Cells") }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThumbnailCollectionViewCell.identifier, for: indexPath) as? ThumbnailCollectionViewCell else { fatalError("Failed to create CollectionView Cells") }
 
-        cell.backgroundColor = .red
-
-        cell.textLabel?.text = pictures[indexPath.item]
+        cell.picture = pictures[indexPath.row]
 
         return cell
     }
