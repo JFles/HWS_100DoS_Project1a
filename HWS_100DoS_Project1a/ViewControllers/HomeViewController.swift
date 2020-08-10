@@ -18,16 +18,20 @@ class HomeViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            self.view.topAnchor.constraint(equalTo: collectionView.topAnchor),
-            self.view.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            self.view.leadingAnchor.constraint(equalTo: collectionView.leadingAnchor),
-            self.view.trailingAnchor.constraint(equalTo: collectionView.trailingAnchor)
-        ])
+
+        view.backgroundColor = .white
         self.collectionView = collectionView
+        NSLayoutConstraint.activate([
+            self.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            self.collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            self.collectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+        ])
     }
 
     // MARK: - Lifecycle methods
@@ -45,6 +49,8 @@ class HomeViewController: UIViewController {
             target: self,
             action: #selector(shareApp)
         )
+
+        collectionView.backgroundColor = .blue
 
         getPicturesFromAppBundle()
     }
@@ -141,6 +147,8 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.identifier, for: indexPath) as? Cell else { fatalError("Failed to create CollectionView Cells") }
 
+        cell.backgroundColor = .red
+
         cell.textLabel?.text = pictures[indexPath.item]
 
         return cell
@@ -150,4 +158,12 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: - CollectionView Delegate methods
 extension HomeViewController: UICollectionViewDelegate {
 
+}
+
+// MARK: - CollectionView Flow Layout methods
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let squareSide = collectionView.frame.width / 2.1
+        return CGSize(width: squareSide, height: squareSide)
+    }
 }
