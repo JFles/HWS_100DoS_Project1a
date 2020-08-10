@@ -9,12 +9,30 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    // Paul states on day 17, P2 that there is no difference between `weak` and `strong` for @IBOutlet
-    // Is Apple's recommendation still to have outlets declared with `strong`?
-    @IBOutlet var imageView: UIImageView!
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = false
+
+        return imageView
+    }()
+
     var selectedImage: String?
     var imageNumber: Int?
     var imageTotal: Int?
+
+    override func loadView() {
+        super.loadView()
+
+        view.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +68,6 @@ class DetailViewController: UIViewController {
     }
 
     @objc func shareTapped() {
-        // get image.imageview and scale jpeg at 0.8
         guard let image = imageView.image?.jpegData(compressionQuality: 0.8)
         else {
             print("No image found")
@@ -59,13 +76,6 @@ class DetailViewController: UIViewController {
 
         let imageTitle = selectedImage ?? "StormImage\(imageNumber ?? 0).jpg"
 
-        // call UIActivityViewController
-        //        #warning("TODO: Add string name to share item")
-        // TODO: Add string name to share item
-        /*
-            - How do i add a string title to `activityItems: [Data]`?
-                - can add the
-         */
         let vc = UIActivityViewController(
             activityItems: [imageTitle, image],
             applicationActivities: nil
@@ -75,7 +85,6 @@ class DetailViewController: UIViewController {
         vc.popoverPresentationController?.barButtonItem =
             navigationItem.rightBarButtonItem
 
-        // present vc
         present(vc, animated: true)
     }
 }

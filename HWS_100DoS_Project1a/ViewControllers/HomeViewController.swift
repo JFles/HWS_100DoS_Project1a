@@ -102,50 +102,6 @@ class HomeViewController: UIViewController {
     }
 }
 
-//// MARK: - TableView methods
-//extension HomeViewController {
-//    override func tableView(
-//        _ tableView: UITableView,
-//        numberOfRowsInSection section: Int
-//    ) -> Int { return pictures.count }
-//
-//    override func tableView(
-//        _ tableView: UITableView,
-//        cellForRowAt indexPath: IndexPath
-//    ) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(
-//            withIdentifier: "Picture",
-//            for: indexPath
-//        )
-//        cell.textLabel?.text = pictures[indexPath.row]
-//        return cell
-//    }
-//
-//    override func tableView(
-//        _ tableView: UITableView,
-//        didSelectRowAt indexPath: IndexPath
-//    ) {
-//        // try loading the "Detail" view controller and cast to Detail VC
-//        if let viewController = storyboard?.instantiateViewController(
-//            identifier: "Detail"
-//            ) as? DetailViewController {
-//            // if successful, set the `selectedImage` prop
-//            viewController.selectedImage = pictures[indexPath.row]
-//
-//            let imageNumber = indexPath.row + 1
-//            let imageTotal = pictures.count
-//            viewController.imageNumber = imageNumber
-//            viewController.imageTotal = imageTotal
-//
-//            // push the detail VC onto the navigation view stack
-//            navigationController?.pushViewController(
-//                viewController,
-//                animated: true
-//            )
-//        }
-//    }
-//}
-
 // MARK: - CollectionView Data Source methods
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -158,6 +114,21 @@ extension HomeViewController: UICollectionViewDataSource {
         cell.picture = pictures[indexPath.row]
 
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let viewController = DetailViewController()
+        viewController.selectedImage = pictures[indexPath.item].name
+
+        let imageNumber = indexPath.row + 1
+        let imageTotal = pictures.count
+        viewController.imageNumber = imageNumber
+        viewController.imageTotal = imageTotal
+
+        navigationController?.pushViewController(
+            viewController,
+            animated: true
+        )
     }
 }
 
