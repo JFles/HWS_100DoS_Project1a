@@ -36,10 +36,18 @@ class ThumbnailCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(backgroundImage)
 
         NSLayoutConstraint.activate([
-            backgroundImage.topAnchor.constraint(equalTo: contentView.topAnchor),
-            backgroundImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            backgroundImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            backgroundImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+            backgroundImage.topAnchor.constraint(
+                equalTo: contentView.topAnchor
+            ),
+            backgroundImage.bottomAnchor.constraint(
+                equalTo: contentView.bottomAnchor
+            ),
+            backgroundImage.leadingAnchor.constraint(
+                equalTo: contentView.leadingAnchor
+            ),
+            backgroundImage.trailingAnchor.constraint(
+                equalTo: contentView.trailingAnchor
+            ),
         ])
     }
 

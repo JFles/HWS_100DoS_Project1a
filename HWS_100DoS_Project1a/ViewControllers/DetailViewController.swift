@@ -30,7 +30,7 @@ class DetailViewController: UIViewController {
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
 

@@ -15,7 +15,10 @@ class HomeViewController: UIViewController {
     fileprivate let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(
+            frame: .zero,
+            collectionViewLayout: layout
+        )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
 
@@ -30,10 +33,18 @@ class HomeViewController: UIViewController {
 
         self.view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            self.collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            self.collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            self.collectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            self.collectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+            self.collectionView.topAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.topAnchor
+            ),
+            self.collectionView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor
+            ),
+            self.collectionView.leadingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.leadingAnchor
+            ),
+            self.collectionView.trailingAnchor.constraint(
+                equalTo: view.layoutMarginsGuide.trailingAnchor
+            ),
         ])
     }
 
@@ -59,7 +70,10 @@ class HomeViewController: UIViewController {
     fileprivate func configureCollectionView() {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.register(ThumbnailCollectionViewCell.self, forCellWithReuseIdentifier: ThumbnailCollectionViewCell.identifier)
+        self.collectionView.register(
+            ThumbnailCollectionViewCell.self,
+            forCellWithReuseIdentifier: ThumbnailCollectionViewCell.identifier
+        )
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.backgroundColor = .white
     }
@@ -104,19 +118,31 @@ class HomeViewController: UIViewController {
 
 // MARK: - CollectionView Data Source methods
 extension HomeViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pictures.count
-    }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int { return pictures.count }
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ThumbnailCollectionViewCell.identifier, for: indexPath) as? ThumbnailCollectionViewCell else { fatalError("Failed to create CollectionView Cells") }
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+        guard
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ThumbnailCollectionViewCell.identifier,
+                for: indexPath
+            ) as? ThumbnailCollectionViewCell
+        else { fatalError("Failed to create CollectionView Cells") }
 
         cell.picture = pictures[indexPath.row]
 
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         let viewController = DetailViewController()
         viewController.selectedImage = pictures[indexPath.item].name
 
@@ -125,10 +151,7 @@ extension HomeViewController: UICollectionViewDataSource {
         viewController.imageNumber = imageNumber
         viewController.imageTotal = imageTotal
 
-        navigationController?.pushViewController(
-            viewController,
-            animated: true
-        )
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -139,7 +162,11 @@ extension HomeViewController: UICollectionViewDelegate {
 
 // MARK: - CollectionView Flow Layout methods
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         let squareSide = collectionView.frame.width / 2.1
         return CGSize(width: squareSide, height: squareSide)
     }
