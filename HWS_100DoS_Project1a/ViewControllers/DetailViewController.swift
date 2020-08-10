@@ -13,7 +13,7 @@ class DetailViewController: UIViewController {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = false
+        imageView.clipsToBounds = true
 
         return imageView
     }()
